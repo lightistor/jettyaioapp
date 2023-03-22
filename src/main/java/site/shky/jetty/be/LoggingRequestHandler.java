@@ -4,10 +4,11 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.EventListener;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,20 +23,20 @@ public class LoggingRequestHandler implements Handler {
     /*
      * (non-Javadoc)
      *
-     * @see org.eclipse.jetty.util.component.LifeCycle#addLifeCycleListener(org.
-     * eclipse.jetty.util.component.LifeCycle.Listener)
-     */
-    @Override
-    public void addLifeCycleListener(Listener arg0) {
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see org.eclipse.jetty.util.component.LifeCycle#isFailed()
      */
     @Override
     public boolean isFailed() {
+        return false;
+    }
+
+    @Override
+    public boolean addEventListener(EventListener eventListener) {
+        return false;
+    }
+
+    @Override
+    public boolean removeEventListener(EventListener eventListener) {
         return false;
     }
 
@@ -87,17 +88,6 @@ public class LoggingRequestHandler implements Handler {
     @Override
     public boolean isStopping() {
         return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.eclipse.jetty.util.component.LifeCycle#removeLifeCycleListener(org.
-     * eclipse.jetty.util.component.LifeCycle.Listener)
-     */
-    @Override
-    public void removeLifeCycleListener(Listener arg0) {
     }
 
     /*
